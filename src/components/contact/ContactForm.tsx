@@ -1,19 +1,19 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
+// import { useState } from "react";
 import Heading from "../ui/Heading";
-import Text from "../ui/Text";
+ 
 import Button from "../ui/Button";
 
 const ContactUs = () => {
-  const [form, setForm] = useState({
-    firstName: "",
-    lastName: "",
-    email: "",
-    message: "",
-    file: null,
-  });
+  // const [form, setForm] = useState({
+  //   firstName: "",
+  //   lastName: "",
+  //   email: "",
+  //   message: "",
+  //   file: null,
+  // });
 
   return (
     <section className="relative h-full bg-[var(--color-orange)] bg-[url('/images/contact/bg.png')] bg-[length:88%_88%] bg-center bg-no-repeat text-white flex flex-col items-center justify-center px-6 py-20">

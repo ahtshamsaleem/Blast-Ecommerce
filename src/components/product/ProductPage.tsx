@@ -7,9 +7,9 @@ import Heading from '../ui/Heading';
 import ImageGallery from 'react-image-gallery';
 import 'react-image-gallery/styles/css/image-gallery.css';
 import Text from '../ui/Text';
-import Button from '../ui/Button';
  
-import CartDrawer from '../cart/Cart';
+ 
+ 
 import { useCart } from '@/src/app/[locale]/(customer)/layout';
 import { FullScreenLoader } from '../ui/FullScreenLoader';
 
@@ -25,7 +25,7 @@ export default function ProductPage() {
 
   const [loading, setLoading] = useState(true);
 
-  const {addToCart, cartItems, clearCart, removeFromCart, cartOpen, setCartOpen} = useCart()
+  const {addToCart, cartItems,  setCartOpen} = useCart()
 
   const [quantity, setQuantity] = useState(1);
  
@@ -65,7 +65,7 @@ useEffect(() => {
 }, [handle]);
 
   if (error) return <p>{error}</p>;
-  if (!product ) return <FullScreenLoader />;  
+  if (!product || loading ) return <FullScreenLoader />;  
 
 
 

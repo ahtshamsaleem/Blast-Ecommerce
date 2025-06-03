@@ -156,7 +156,7 @@ const SearchResults = () => {
           <Heading size="sm" className="text-white mb-6">
             Search results for
           </Heading>
-          <Text className="text-white italic mb-6">"BOX"</Text>
+          <Text className="text-white italic mb-6">Search Term</Text>
 
           <select className="w-full border border-black rounded-md py-2 px-3 mb-6">
             <option>Variants</option>

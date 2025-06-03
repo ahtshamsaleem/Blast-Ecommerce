@@ -3,8 +3,8 @@
 import Drawer from 'react-modern-drawer';
 import 'react-modern-drawer/dist/index.css';
 import { useEffect, useState } from 'react';
-import { useCart } from '@/src/app/(customer)/layout';
-import { Check, Trash2 } from 'lucide-react';
+ 
+import {   Trash2 } from 'lucide-react';
 import CheckoutButton from './CheckoutButton';
 
 type Variant = {
