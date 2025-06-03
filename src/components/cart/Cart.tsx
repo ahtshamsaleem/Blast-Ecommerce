@@ -46,7 +46,25 @@ export default function CartDrawer({
 
   const [totalPrice, setTotalPrice] = useState( 0);
    
+  const [drawerSize, setDrawerSize] = useState<number | string>(500);
 
+useEffect(() => {
+  const handleResize = () => {
+    const width = window.innerWidth;
+    if (width < 768) {
+      setDrawerSize('100%'); // Full width on mobile
+    } else if (width < 1024) {
+      setDrawerSize(400); // Medium on tablets
+    } else {
+      setDrawerSize(500); // Full size on desktop
+    }
+  };
+
+  handleResize(); // Call once on mount
+  window.addEventListener('resize', handleResize);
+
+  return () => window.removeEventListener('resize', handleResize);
+}, []);
 
   useEffect(() => {
     const total = cartItems.reduce((sum, item) => {
@@ -62,7 +80,7 @@ export default function CartDrawer({
 
 
   return (
-    <Drawer open={isOpen} onClose={onClose} direction="right"   size={500}  >
+    <Drawer open={isOpen} onClose={onClose} direction="right"  size={drawerSize}   >
       <div className=" w-full flex flex-col justify-start items-start p-16 h-full bg-white shadow-lg">
         <h2 className="text-xl font-bold mb-4   ">Your Cart</h2>
         {cartItems.length === 0 ? (
@@ -106,14 +124,19 @@ export default function CartDrawer({
           <span className="font-semibold">Total:</span>
           <span className="text-lg font-bold">${totalPrice.toFixed(2)}</span>
         </div>
-        <div onClick={onClose} className="mt-4 cursor-pointer px-8 py-4 bg-green-600 text-white rounded hover:bg-green-700 transition-colors">
-          <CheckoutButton cartItems={cartItems.map((el) => {
+        <div   className="w-full text-center mt-4 cursor-pointer px-8 py-4 bg-green-600 text-white rounded hover:bg-green-700 transition-colors">
+          <CheckoutButton onClose={onClose} cartItems={cartItems.map((el) => {
             return {
               variantId: el.variant.id,
               quantity: el.quantity
             }
           })} />
+
+          
         </div>
+        <button onClick={onClose} className="w-full text-center mt-4 cursor-pointer px-8 py-4   bg-gray-200 text-black rounded hover:bg-gray-300 transition-colors">
+            Cancel
+          </button>
       </div>
     </Drawer>
   );

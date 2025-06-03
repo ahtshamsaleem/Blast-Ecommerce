@@ -167,13 +167,13 @@ const Navbar = () => {
                   className="absolute left-3 top-1/2 -translate-y-1/2 text-black"
                 />
               </div>
-              <ShoppingCart className="cursor-pointer" size={24} color="#000" onClick={() => setCartOpen(true)}/>
+              <div className="relative"><ShoppingCart className="cursor-pointer" size={24} color="#000" onClick={() => setCartOpen(true)}/>
 
                  {itemCount > 0 && (
         <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">
           {itemCount}
         </span>
-      )}
+      )}</div>
             </div>
           )}
 

@@ -2,7 +2,7 @@
 
 
 
-export default function CheckoutButton({ cartItems }) {
+export default function CheckoutButton({ cartItems, onClose  }) {
 
 
   console.log('CheckoutButton cartItems:💕❣❣❣💛🧡💙💙💙', cartItems);
@@ -17,6 +17,7 @@ export default function CheckoutButton({ cartItems }) {
 
     const checkoutUrl = `https://blastargentina.com/cart/${cartString}`;
     window.location.href = checkoutUrl;
+    onClose(); // Close the cart drawer after redirecting
   };
 
   const extractVariantId = (gid) => gid.split('/').pop();
