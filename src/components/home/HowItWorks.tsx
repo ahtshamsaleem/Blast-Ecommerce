@@ -6,6 +6,7 @@ import { motion } from "framer-motion";
 import Button from "../ui/Button";
 import Heading from "../ui/Heading";
 import Text from "../ui/Text";
+import { useTranslations } from "next-intl";
 
 const steps = [
   {
@@ -27,6 +28,7 @@ const HowItWorks = () => {
   const [, setPrevStep] = useState(0);
   const buttonRefs: RefObject<(HTMLDivElement | null)[]> = useRef([]);
   const [arrowTop, setArrowTop] = useState(0);
+  const t = useTranslations();
 
   useEffect(() => {
     const el = buttonRefs.current[activeStep];
@@ -44,8 +46,8 @@ const HowItWorks = () => {
   return (
     <section className="z-1 relative w-full bg-[var(--color-blue)] p-8 pt-20 pb-40 flex flex-col items-center">
       <div className="max-w-7xl w-full flex flex-col items-center sm:items-start sm:gap-9 gap-4 sm:mb-24 mb-32">
-        <Heading size="md">HOW IT WORKS?</Heading>
-        <Text>Dig in, discover, and collect. It&apos;s that simple.</Text>
+        <Heading size="md">{t("how_h1")}</Heading>
+        <Text>{t("how_t1")}</Text>
       </div>
 
 <div className="relative max-w-5xl w-full bg-white/20 rounded-4xl justify-center flex flex-col sm:flex-row min-h-[450px] sm:min-h-[540px]">
@@ -102,7 +104,7 @@ const HowItWorks = () => {
             />
           </div>
 
-          <Heading size="xs" color="black">HOW IT WORKS?</Heading>
+          <Heading size="xs" color="black">{t("how_h1")}</Heading>
 
           <div className="relative h-20 overflow-hidden">
             <motion.div

@@ -8,8 +8,10 @@ import ImageGallery from 'react-image-gallery';
 import 'react-image-gallery/styles/css/image-gallery.css';
 import Text from '../ui/Text';
 import Button from '../ui/Button';
-import { useCart } from '@/src/app/(customer)/layout';
+ 
 import CartDrawer from '../cart/Cart';
+import { useCart } from '@/src/app/[locale]/(customer)/layout';
+import { FullScreenLoader } from '../ui/FullScreenLoader';
 
 
 export default function ProductPage() {
@@ -24,6 +26,8 @@ export default function ProductPage() {
   const [loading, setLoading] = useState(true);
 
   const {addToCart, cartItems, clearCart, removeFromCart, cartOpen, setCartOpen} = useCart()
+
+  const [quantity, setQuantity] = useState(1);
  
 console.log('Cart Items:', cartItems);
 // inside your component:
@@ -32,6 +36,7 @@ useEffect(() => {
     try {
       const res = await axios.get(`/api/shopify/product/${handle}`);
       setProduct(res.data);
+      setSelectedVariant(res.data.variants.edges[0].node); // Set the first variant as default
       console.log('Product fetched:💚', res.data); 
       
       
@@ -60,7 +65,7 @@ useEffect(() => {
 }, [handle]);
 
   if (error) return <p>{error}</p>;
-  if (!product) return <p>Loading...</p>;
+  if (!product ) return <FullScreenLoader />;  
 
 
 
@@ -139,7 +144,7 @@ useEffect(() => {
             </Text>
 
             <h3  className=' text-2xl font-semibold'>
-             ${selectedVariant ? selectedVariant.price.amount : product.variants.edges[0].node.price.amount} 
+             { product.variants.edges[0].node.price.currencyCode === "USD" ? "$" : product.variants.edges[0].node.price.currencyCode}{selectedVariant ? selectedVariant.price.amount : product.variants.edges[0].node.price.amount} 
             </h3>
 
 
@@ -173,11 +178,11 @@ useEffect(() => {
 
                 <Heading size='xs'>{node.title}</Heading>
 
-                <Text size='lg' color='white'>${node.price.amount}</Text>
+                <Text size='lg' color='white'>{node.price.currencyCode === "USD" ? "$" : node.price.currencyCode}{node.price.amount}</Text>
 
                 {node.compareAtPrice && (
                   <Text size='base' className='line-through text-gray-700'>
-                    ${node.compareAtPrice.amount}
+                    {node.compareAtPrice.currencyCode === "USD" ? "$" : node.compareAtPrice.currencyCode}{node.compareAtPrice.amount}
                   </Text>
                 )}
 
@@ -235,11 +240,14 @@ useEffect(() => {
                   defaultValue={1}
                   min={1}
                   className='w-24 border border-gray-300 rounded-md p-2'
+                  value={quantity}
                   onChange={(e) => {
                     const value = parseInt(e.target.value, 10);
                     if (value < 1) {
                       e.target.value = '1';
                     }
+
+                    setQuantity(value);
                   }}
                 />
               </div>
@@ -248,7 +256,7 @@ useEffect(() => {
 
 
                
-              <button onClick={() => addToCart(product, selectedVariant)}  className='w-full bg-white text-black hover:bg-gray-200 border border-black  py-4 cursor-pointer rounded-lg'>Add to Cart</button>
+              <button onClick={() => {addToCart(product, selectedVariant, quantity); setCartOpen(true)}}  className='w-full bg-white text-black hover:bg-gray-200 border border-black  py-4 cursor-pointer rounded-lg'>Add to Cart</button>
             </div>
 
         </div>

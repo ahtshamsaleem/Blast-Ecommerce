@@ -41,9 +41,9 @@ const CustomNavbar = () => {
   
 
   const backgroundColorClass =
-    pathname.startsWith("/awards")
+    pathname.includes("/awards")
       ? "bg-[var(--color-brown3)]"
-      : pathname.startsWith("/contact")
+      : pathname.includes("/contact")
       ? "bg-[var(--color-orange)]"
       : "bg-[var(--color-blue)]";
 

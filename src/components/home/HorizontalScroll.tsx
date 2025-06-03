@@ -11,6 +11,7 @@ import {
   useSpring
 } from "framer-motion";
 import { usePathname } from "next/navigation";
+import { useTranslations } from "next-intl";
 
 const imageData = [
   {
@@ -66,6 +67,8 @@ const isShopPage = pathname.includes('shop');
 
   const [scrollRange, setScrollRange] = useState(0);
   const [viewportW, setViewportW] = useState(0);
+
+  const t = useTranslations()
 
 useLayoutEffect(() => {
   if (scrollContentRef.current) {
@@ -125,7 +128,7 @@ useLayoutEffect(() => {
 
         <div className="absolute top-1/2 left-1/2 w-full transform -translate-x-1/2 -translate-y-1/2 z-30 text-white text-center pointer-events-none">
         <Heading size="base">
-            WHAT YOU COULD UNLOCK <br /> WITH JUST ONE KIT
+            {t("ugc_h1")} <br />  {t("ugc_h2")}
         </Heading>
         </div>
 

@@ -9,6 +9,7 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import { motion } from "framer-motion";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
+import { useTranslations } from "next-intl";
 
 const tabs = ["Instant Prizes", "Cumulative Prizes"];
 
@@ -90,6 +91,7 @@ const FeaturedRewards = () => {
   const tabRefs = useRef<(HTMLButtonElement | null)[]>([]);
   const [sliderStyle, setSliderStyle] = useState({ left: 0, width: 0 });
   const carouselRef = useRef<Carousel>(null);
+  const t = useTranslations()
 
   useLayoutEffect(() => {
     const el = tabRefs.current[activeTab];
@@ -173,10 +175,10 @@ const FeaturedRewards = () => {
     <section className="relative flex flex-col w-full min-h-screen bg-[var(--color-white)] pb-20 items-center overflow-hidden">
       <div className="relative z-10 max-w-7xl sm:p-8 p-4 sm:pt-8 !pt-18 w-full mx-auto flex flex-col items-center text-center gap-10 mb-8">
         <Heading size="md" color="black">
-          Featured Rewards
+          {t("featured_h1")}
         </Heading>
         <Text>
-          From box to surprise in just minutes. Here&apos;s how the fun begins.
+          {t("featured_t1")}
         </Text>
       </div>
 

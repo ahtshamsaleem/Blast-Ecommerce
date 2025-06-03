@@ -81,3 +81,24 @@ export const GET_PRODUCT_BY_HANDLE = `
     }
   }
 `;
+
+
+
+
+
+
+
+export const CREATE_CHECKOUT = `
+  mutation checkoutCreate($input: CheckoutCreateInput!) {
+    checkoutCreate(input: $input) {
+      checkout {
+        id
+        webUrl
+      }
+      userErrors {
+        field
+        message
+      }
+    }
+  }
+`;

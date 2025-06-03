@@ -15,7 +15,8 @@ import Button from "./ui/Button";
 import clsx from "clsx";
 import { motion, AnimatePresence } from "framer-motion";
 import CartDrawer from "./cart/Cart";
-import { useCart } from "../app/(customer)/layout";
+import { useCart } from "../app/[locale]/(customer)/layout";
+ 
 
 const navItems = [
   { label: "Home", href: "/" },
@@ -26,8 +27,8 @@ const navItems = [
 ];
 
 const languages = [
-  { label: "English", short: "EN" },
-  { label: "Argentina", short: "AR" },
+  { label: "English", short: "en" },
+  { label: "Argentina", short: "fr" },
 ];
 
 const Navbar = () => {
@@ -42,9 +43,9 @@ const Navbar = () => {
   
 
   const backgroundColorClass =
-    pathname.startsWith("/awards")
+    pathname.includes("/awards")
       ? "bg-[var(--color-brown3)] hidden"
-      : pathname.startsWith("/contact")
+      : pathname.includes("/contact")
       ? "bg-[var(--color-orange)]"
       : "bg-[var(--color-blue)]";
 
@@ -53,7 +54,14 @@ const Navbar = () => {
 
   const {    setCartOpen, cartOpen , cartItems, removeFromCart } = useCart()
 
+ 
+  const itemCount = cartItems.reduce((total, item) => total + item.quantity, 0);
 
+  const switchLanguage = (newLocale: string) => {
+    const segments = pathname.split('/');
+    segments[1] = newLocale; // Replace current locale
+    router.push(segments.join('/'));
+  };
 
   return (
     <header className={clsx("w-full px-6 lg:px-16 py-6 lg:py-12 ", backgroundColorClass)}>
@@ -122,14 +130,18 @@ const Navbar = () => {
                       className="absolute top-8 left-0 bg-white rounded shadow p-2 z-10"
                     >
                       {languages.map((lang) => (
-                        <li
+                        <button
                           key={lang.label}
+                          
                           className="text-[#242424] px-4 py-2 hover:bg-gray-100 cursor-pointer"
-                          onClick={() => setLangOpen(false)}
+                          onClick={() => {
+                            setLangOpen(false)
+                                switchLanguage(lang.short)
+                          }}
                         >
                           <span className="hidden lg:inline">{lang.label}</span>
                           <span className="lg:hidden">{lang.short}</span>
-                        </li>
+                        </button>
                       ))}
                     </motion.ul>
                   )}
@@ -156,6 +168,12 @@ const Navbar = () => {
                 />
               </div>
               <ShoppingCart className="cursor-pointer" size={24} color="#000" onClick={() => setCartOpen(true)}/>
+
+                 {itemCount > 0 && (
+        <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">
+          {itemCount}
+        </span>
+      )}
             </div>
           )}
 

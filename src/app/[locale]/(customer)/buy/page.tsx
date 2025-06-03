@@ -1,5 +1,6 @@
 "use client";
 
+import { FullScreenLoader } from "@/src/components/ui/FullScreenLoader";
 import Heading from "@/src/components/ui/Heading";
 import Text from "@/src/components/ui/Text";
 import { useRouter } from "next/navigation";
@@ -75,6 +76,8 @@ type Product = {
   };
 };
 
+
+
 const SearchResults = () => {
 
 
@@ -101,7 +104,7 @@ const SearchResults = () => {
           id: product.id,
           name: product.title,
           tag: product.tags[0] || "General", // Use first tag or default to "General"
-          price: `$${product.variants.edges[0].node.price.amount}`,
+          price: `${product.variants.edges[0].node.price.currencyCode === "USD" ? "$" : product.variants.edges[0].node.price.currencyCode} ${product.variants.edges[0].node.price.amount}`,
           rating: 5, // Assuming a static rating for now
           image: product.images.edges[0].node.url,
           tagColor: "bg-yellow-400",
@@ -120,7 +123,7 @@ const SearchResults = () => {
   }, []);
 
   if (error) return <p>{error}</p>;
-  if (!products.length) return <p>Loading products...</p>;
+  if (!products.length) return <FullScreenLoader />;
 
 
 
@@ -192,7 +195,7 @@ const SearchResults = () => {
                 {product.tag}
               </div>
               <Text className="text-yellow-600 font-bold text-lg mb-1">
-                {product.price}
+                {product.price} 
               </Text>
               <Text className="text-sm text-black mb-1">Rating</Text>
               <div className="flex justify-center gap-1">

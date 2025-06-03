@@ -2,9 +2,10 @@
 
 import Drawer from 'react-modern-drawer';
 import 'react-modern-drawer/dist/index.css';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useCart } from '@/src/app/(customer)/layout';
-import { Trash2 } from 'lucide-react';
+import { Check, Trash2 } from 'lucide-react';
+import CheckoutButton from './CheckoutButton';
 
 type Variant = {
   id: string;
@@ -43,10 +44,17 @@ export default function CartDrawer({
 
  
 
+  const [totalPrice, setTotalPrice] = useState( 0);
+   
 
 
-
-
+  useEffect(() => {
+    const total = cartItems.reduce((sum, item) => {
+      const price = parseFloat(item.variant.price.amount);
+      return sum + price * item.quantity;
+    }, 0);
+    setTotalPrice(total);
+  } , [cartItems]);
 
 
 
@@ -93,9 +101,19 @@ export default function CartDrawer({
             ))}
           </ul>
         )}
-        <button onClick={onClose} className="mt-4  px-8 py-4 bg-green-600 text-white rounded hover:bg-green-700 transition-colors">
-          Checkout
-        </button>
+
+        <div className="mt-6 border-t pt-4 w-full flex justify-between items-center">
+          <span className="font-semibold">Total:</span>
+          <span className="text-lg font-bold">${totalPrice.toFixed(2)}</span>
+        </div>
+        <div onClick={onClose} className="mt-4 cursor-pointer px-8 py-4 bg-green-600 text-white rounded hover:bg-green-700 transition-colors">
+          <CheckoutButton cartItems={cartItems.map((el) => {
+            return {
+              variantId: el.variant.id,
+              quantity: el.quantity
+            }
+          })} />
+        </div>
       </div>
     </Drawer>
   );

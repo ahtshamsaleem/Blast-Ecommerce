@@ -4,19 +4,21 @@ import Image from "next/image";
 import Heading from "../ui/Heading";
 import Button from "../ui/Button";
 import { motion } from "framer-motion";
+import { useTranslations } from "next-intl";
 
 const BeyondTheBox = () => {
+  const t = useTranslations();
   return (
     <section className="relative flex flex-col w-full h-[600px] sm:h-screen pb-20 p-8 md:pb-40 bg-[var(--color-orange)] items-center justify-center overflow-hidden">
       <div className="relative z-10 max-w-7xl mx-auto flex flex-col-reverse md:flex-row items-center justify-between gap-20">
         <div className="flex flex-col sm:items-start items-center  text-left max-w-xl gap-6">
           <Heading className="!text-center sm:!text-left">
-            <span className="block sm:hidden">OUR BRAND IS ALL ABOUT SURPRISES</span>
+            <span className="block sm:hidden">{t("beyond_h1")}</span>
             <span className="hidden sm:block">
-              OUR BRAND <br />
-              IS ALL <br />
-              ABOUT <br />
-              SURPRISES
+              {t("beyond_t1")} <br />
+             {t("beyond_t2")}<br />
+             {t("beyond_t3")} <br />
+              {t("beyond_t4")}
             </span>
           </Heading>
           <Button size="xl" label="Get Your Box" />

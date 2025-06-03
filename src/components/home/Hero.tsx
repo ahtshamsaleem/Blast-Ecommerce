@@ -5,8 +5,10 @@ import { motion } from "framer-motion";
 import Button from "../ui/Button";
 import Heading from "../ui/Heading";
 import Text from "../ui/Text";
+import { useTranslations } from "next-intl";
 
 const Hero = () => {
+  const t = useTranslations();
   return (
 <section className="relative flex flex-col w-full h-[471px] sm:h-screen pb-20 p-8 md:pb-40 bg-[var(--color-blue)] items-center justify-center overflow-hidden">
       <motion.div
@@ -39,10 +41,10 @@ const Hero = () => {
 
       <div className="z-10 flex flex-col items-center justify-center text-center gap-7 w-full max-w-screen-sm px-6">
         <Heading>
-          unbox <br /> the <br /> unexpected
+          {t("hero_unbox")} <br /> {t("hero_the")} <br /> {t("hero_unexpected")}
         </Heading>
         <Text size="lg">
-          Every Dig Kit hides instant win prizes, and gems to collect massive rewards. Ready to see what&apos;s inside?
+          {t("hero_txt1")}
         </Text>
         <Button label="Get Your Box" size="xl" />
       </div>

@@ -5,8 +5,11 @@ import Button from "../ui/Button";
 import Heading from "../ui/Heading";
 import Text from "../ui/Text";
 import { motion } from "framer-motion";
+ 
+import { useTranslations } from "next-intl";
 
 const BlastOverview = () => {
+  const t = useTranslations()
   return (
     <section className="relative w-full h-[758px] sm:h-full overflow-hidden flex items-center justify-center p-8 pt-15 sm:pt-20">
       {/* Backgrounds */}
@@ -28,12 +31,12 @@ const BlastOverview = () => {
       <div className="relative z-20 max-w-7xl mx-auto w-full flex flex-col md:flex-row items-center justify-between gap-8 md:gap-20 pt-2 pb-10 sm:pt-20 sm:pb-40 h-full">
         <div className="flex flex-col md:gap-6 text-left items-center md:items-start">
           <Heading size="md" className="text-center md:text-left">
-            THRILL, SURPRISE, AND <br /> REWARDS <br /> IN EVERY BOX!
+           {t("2blast_h1")} <br /> {t("2blast_h2")} <br /> {t("2blast_h3")}
           </Heading>
           <Text className="md:mt-6 md:mb-11 mt-4 mb-4 text-center md:text-left">
-            Blast turns every unboxing into an adventure—
+            {t("2blast_t1")}
             <br className="hidden md:block" />
-            thrill, surprise, and real rewards in every dig.
+            {t("2blast_t2")}
           </Text>
           <Button size="xl" label="Shop All Boxes" />
         </div>

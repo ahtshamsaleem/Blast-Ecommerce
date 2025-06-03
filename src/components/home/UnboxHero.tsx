@@ -5,8 +5,10 @@ import Button from '../ui/Button';
 import Text from '../ui/Text';
 import Heading from '../ui/Heading';
 import { motion } from 'framer-motion';
+import { useTranslations } from 'next-intl';
 
 const UnboxHero = () => {
+  const t = useTranslations();
   return (
     <section className="relative w-full  h-screen bg-[var(--color-green)] overflow-hidden flex justify-center p-8 pt-44 pb-40">
       
@@ -69,12 +71,12 @@ const UnboxHero = () => {
 <div className="z-10 flex flex-col items-center max-w-4xl text-center w-full relative mt-15 sm:mt-0">
  <div className='relative'>
      <Heading size="base" className="text-white">
-    UNBOX
+    {t("unbox_h1")}
   </Heading>
 
   <div className="relative inline-block mt-2 mb-2">
       <Heading size="base" className="text-white outline">
-    THE
+       {t("unbox_h2")}
   </Heading>
     <Image
       src="/images/shovel.png"
@@ -86,7 +88,7 @@ const UnboxHero = () => {
   </div>
 
   <Heading size="base" className="text-white">
-    EXCITEMENT
+       {t("unbox_h3")}
   </Heading>
 
       <Image
@@ -99,7 +101,7 @@ const UnboxHero = () => {
  </div>
 
   <Text size="xl" className="mt-6 sm:mt-20 text-black">
-    Ready to Unbox the Fun? Get Your Mystery Box Now!
+       {t("unbox_t1")}
   </Text>
 
   <div className="mt-6 flex justify-center">

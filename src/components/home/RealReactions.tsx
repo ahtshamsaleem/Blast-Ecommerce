@@ -6,6 +6,7 @@ import Heading from "../ui/Heading";
 import Text from "../ui/Text";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
+import { useTranslations } from "next-intl";
 
 const videos = [
   {
@@ -49,6 +50,7 @@ const responsive = {
 };
 
 const ReactionsCarousel = () => {
+  const t = useTranslations();
   return (
     <section className="relative flex flex-col w-full sm:h-full h-screen  items-center overflow-hidden">
       <Carousel
@@ -84,11 +86,11 @@ const ReactionsCarousel = () => {
 
               <div className="flex-1 max-w-xl gap-6 flex flex-col items-center sm:items-start">
                 <Heading size="md" className="mb-4">    
-                  REAL REACTIONS. <br /> REAL REWARDS.
+                {t("reaction_h1")}<br /> {t("reaction_h2")}
                 </Heading>
                 <Text size="xl" className="mb-6">
-                  Watch the thrill unfold as kids unbox their Blast kits, discover hidden prizes, and light up with excitement. These real reactions capture the fun, mystery, and joy that come with every dig, showing just how magical each moment can be.
-                </Text>
+                  {t("reaction_t1")}
+                  </Text>
                 <Button label={item.text} size="xl" />
               </div>
             </div>

@@ -1,7 +1,8 @@
 // src/context/CartContext.tsx
 'use client';
 
-import CartDrawer from '@/src/components/cart/Cart';
+ 
+import Footer from '@/src/components/Footer';
 import Navbar from '@/src/components/Navbar';
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 
@@ -82,7 +83,7 @@ export default function  CartProvider ({ children }: { children: ReactNode })   
          <Navbar />
       {children}
 
-    
+         <Footer />
 
     </CartContext.Provider>
   );
