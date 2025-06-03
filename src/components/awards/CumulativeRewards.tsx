@@ -56,40 +56,41 @@ const slidesArr = [
 
 
 
-const Star = ({ imgName,  }) => {
-  return (
-    <Image
-      src={`/images/${imgName}.png`}
-      width={400}
-      height={400}
-      alt={imgName}
-      className={`w-28 h-28`}
-    />
-  );
-};
+// const Star = ({ imgName,  }) => {
+//   return (
+//     <Image
+//       src={`/images/${imgName}.png`}
+//       width={400}
+//       height={400}
+//       alt={imgName}
+//       className={`w-28 h-28`}
+//     />
+//   );
+// };
 
 
-const SmallStar = ({ imgName,  }) => {
-  return (
-    <Image
-      src={`/images/${imgName}.png`}
-      width={200}
-      height={200}
-      alt={imgName}
-      className={`w-12 h-12`}
-    />
-  );
-};
+// const SmallStar = ({ imgName,  }) => {
+//   return (
+//     <Image
+//       src={`/images/${imgName}.png`}
+//       width={200}
+//       height={200}
+//       alt={imgName}
+//       className={`w-12 h-12`}
+//     />
+//   );
+// };
 
-const Slide = ({ item, offset }) => {
+const Slide = ({ item, offset, centerIndex, i }) => {
   const rotate = offset * -10;
   const translateY = Math.abs(offset) * -40;
   const scale = offset === 0 ? 1 : 0.9;
   const bgUrl = `/images/awardsBg${item.id}.png`;
 
-  return (
+  console.log("centerIndex", centerIndex, "i", i, "offset", offset);
+  return (  
     <motion.div
-      className="w-[250px] h-[400px] relative bg-center bg-contain bg-no-repeat flex items-center justify-center rounded-xl overflow-hidden"
+      className={`w-[250px] h-[400px] relative bg-center bg-contain bg-no-repeat flex items-center justify-center rounded-xl overflow-hidden ${centerIndex !== (i) && "max-xl:invisible" }`}
       style={{
         backgroundImage: `url(${bgUrl})`,
       }}
@@ -126,24 +127,52 @@ const CumulativeRewards = () => {
   };
 
   return (
-    <div className="w-full flex flex-col justify-center items-center gap-4 bg-[#FFEB03] py-28">
+    <div className="w-full flex flex-col justify-center items-center gap-4 bg-[#FFEB03] py-28 max-xl:px-8 overflow-hidden">
 
 
 
       <div className="w-full flex justify-center items-end  gap-4 ">
-         <Star imgName={"Star1"}  />
+          
+         <Image
+      src={`/images/star1.png`}
+      width={400}
+      height={400}
+      alt={"Star1"}
+      className={`w-28 h-28 max-xl:hidden`}
+    />
          <Heading color="white" size="sm" className="text-center">
            cumulative rewards
            <br />
            collect more, win more
          </Heading>
-         <Star imgName={"Star2"}  />
+         <Image
+      src={`/images/star2.png`}
+      width={400}
+      height={400}
+      alt={"Star2"}
+      className={`w-28 h-28 max-xl:hidden`}
+    />
        </div>
 
-       <div className="w-full flex justify-between items-center max-w-[30%]   px-12   ">
-         <SmallStar imgName={"Star3"} />
+       <div className="w-full flex justify-between items-center max-w-[30%]   px-12  max-xl:hidden ">
+          
+         <Image
+      src={`/images/star3.png`}
+      width={200}
+      height={200}
+      alt={"Star3"}
+      className={`w-12 h-12`}
+    />
 
-         <SmallStar imgName={"Star4"} />
+
+        <Image
+      src={`/images/star4.png`}
+      width={200}
+      height={200}
+      alt={"Star4"}
+      className={`w-12 h-12`}
+    />
+          
        </div>
 
        <div className="w-full flex justify-center items-end  gap-4 max-w-lg">
@@ -170,7 +199,7 @@ const CumulativeRewards = () => {
         >
           {slidesArr.map((item, i) => {
             const offset = i - centerIndex;
-            return <Slide key={item.id} item={item} offset={offset} />;
+            return <Slide key={item.id} item={item} offset={offset} centerIndex={centerIndex} i={i} />;
           })}
         </div>
       </div>

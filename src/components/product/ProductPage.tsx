@@ -28,6 +28,23 @@ export default function ProductPage() {
   const {addToCart, cartItems,  setCartOpen} = useCart()
 
   const [quantity, setQuantity] = useState(1);
+
+
+  const [thumbPosition, setThumbPosition] = useState<'left' | 'bottom'>('left');
+
+useEffect(() => {
+  const updatePosition = () => {
+    if (window.innerWidth < 768) {
+      setThumbPosition('bottom');
+    } else {
+      setThumbPosition('left');
+    }
+  };
+
+  updatePosition();
+  window.addEventListener('resize', updatePosition);
+  return () => window.removeEventListener('resize', updatePosition);
+}, []);
  
 console.log('Cart Items:', cartItems);
 // inside your component:
@@ -93,7 +110,7 @@ useEffect(() => {
 
 
   return (
-    <div className='w-full flex flex-row max-xl:flex-col justify-center  items-start gap-16 py-20    bg-[#36A6DE]'>
+    <div className='w-full flex flex-row max-xl:flex-col justify-center  items-start gap-16 py-20 max-lg:py-8    bg-[#36A6DE]'>
 
          
 <div className="w-full max-w-2xl   p-4  ">
@@ -105,7 +122,7 @@ useEffect(() => {
     showThumbnails={true}
     slideDuration={450}
     autoPlay={false}
-    thumbnailPosition="left"
+    thumbnailPosition={thumbPosition}
     showNav={false}
     showBullets={false}
     showIndex={true}
@@ -127,7 +144,7 @@ useEffect(() => {
 
 
 
-        <div className=' flex flex-col justify-start items-start gap-6'>
+        <div className=' flex flex-col justify-start items-start gap-6 max-xl:px-8 '>
           <Heading size='sm' className='text-2xl font-bold'>{product.title}</Heading>
           <div className='w-full flex flex-row justify-start items-start gap-2'>
             <Text className="text-sm text-black mb-1">Rating</Text>
@@ -161,7 +178,7 @@ useEffect(() => {
           {/* <p className='text-lg'>{product.description}</p> */}
           
           <h2 className='text-xl font-semibold'>Choose Your Bundle & Save!</h2>
-          <ul className='list-none flex flex-row justify-start items-start gap-4 flex-wrap '>
+          <ul className='list-none flex flex-row justify-start items-start gap-4 flex-wrap max-xl:hidden '>
             {product.variants.edges.map(({ node }, index) => (
               <li key={node.id} onClick={() => setSelectedVariant(node)} className={`relative cursor-pointer h-full flex flex-col justify-center items-center   gap-2  border-2 border-gray-300 p-4 rounded-lg hover:bg-white/50 duration-200 transition-all ${selectedVariant?.id === node.id ? 'bg-white/50 border-gray-800' : 'bg-white/10'}`}>
                 {/* {node.title} - {node.price.amount} {node.price.currencyCode} */}
@@ -206,6 +223,65 @@ useEffect(() => {
               </li>
             ))}
           </ul>
+
+
+
+
+
+
+
+
+
+          <ul className='list-none flex flex-row justify-start items-start gap-4 flex-wrap  xl:hidden '>
+            {product.variants.edges.map(({ node }, index) => (
+              <li key={node.id} onClick={() => setSelectedVariant(node)} className={`relative cursor-pointer h-full flex flex-col justify-center items-center   gap-2  border-2 border-gray-300 p-4 rounded-lg hover:bg-white/50 duration-200 transition-all ${selectedVariant?.id === node.id ? 'bg-white/50 border-gray-800' : 'bg-white/10'}`}>
+                {/* {node.title} - {node.price.amount} {node.price.currencyCode} */}
+
+
+                
+
+
+                  <img
+                  src={node.image?.url || product.images.edges[0]?.node.url}
+                  alt={node.image?.altText || product.images.edges[0]?.node.altText}
+                  width={50}
+                  className='ml-2 inline-block'
+                />
+
+                <Heading size='xxs'>{node.title}</Heading>
+
+                <Text size='sm' color='white'>{node.price.currencyCode === "USD" ? "$" : node.price.currencyCode}{node.price.amount}</Text>
+
+                {node.compareAtPrice && (
+                  <Text size='base' className='line-through text-gray-700'>
+                    {node.compareAtPrice.currencyCode === "USD" ? "$" : node.compareAtPrice.currencyCode}{node.compareAtPrice.amount}
+                  </Text>
+                )}
+
+
+                {
+                  index === 2 && (
+                    <span className='absolute -top-3 right-[50%] translate-x-[50%] bg-yellow-500 text-white px-4 w-[90%] py-1 rounded-full text-nowrap text-center text-xs'>
+                      Best Value
+                    </span>
+                  )
+                }
+                {/* <img
+                  src={'/images/bestValue.png'}
+                  alt='Best Value'
+                  className='absolute -top-[18%] right-0 w-full  '
+                /> */}
+
+                
+
+              </li>
+            ))}
+          </ul>
+
+
+
+
+
 
 
 

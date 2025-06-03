@@ -94,7 +94,7 @@ const InstantPrizes = () => {
   );
 
   return (
-    <section className="relative z-[10] flex flex-col w-full min-h-screen pt-18 bg-[var(--color-brown3)] pb-20 items-center overflow-hidden">
+    <section className="relative z-[10] flex flex-col w-full min-h-screen max-xl:min-h-auto pt-18 bg-[var(--color-brown3)] pb-20 items-center overflow-hidden">
       <div className="max-w-4xl w-full mx-auto sm:p-8 p-4 sm:pt-8  text-center z-10 mb-8 max-lg:mb-0 ">
         <Heading size="sm" color="white">
           <span className='text-[#DBC1A2]'>

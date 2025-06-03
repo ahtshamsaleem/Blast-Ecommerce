@@ -24,8 +24,8 @@ const arco = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Your Site",
-  description: "Using Arboria & Arco fonts",
+  title: "Blast | Unbox the excitement",
+  description: "Blast | Unbox the excitement",
 };
 
 
