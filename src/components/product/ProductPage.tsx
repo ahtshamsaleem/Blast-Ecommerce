@@ -23,7 +23,7 @@ export default function ProductPage() {
 
   const [images, setImages] = useState ([]);
 
-  const [loading, setLoading] = useState(true);
+ 
 
   const {addToCart, cartItems,  setCartOpen} = useCart()
 
@@ -38,7 +38,8 @@ useEffect(() => {
       setProduct(res.data);
       setSelectedVariant(res.data.variants.edges[0].node); // Set the first variant as default
       console.log('Product fetched:💚', res.data); 
-      
+
+       
       
       const mappedImages = res.data.images.edges.map(({ node }) => ({
         original: node.url,
@@ -65,7 +66,7 @@ useEffect(() => {
 }, [handle]);
 
   if (error) return <p>{error}</p>;
-  if (!product || loading ) return <FullScreenLoader />;  
+  if (!product  ) return <FullScreenLoader />;  
 
 
 
@@ -110,7 +111,7 @@ useEffect(() => {
     showIndex={true}
     useBrowserFullscreen={true}
     onError={() => console.error('Error loading image')}
-    onImageLoad={() => setLoading(false)}
+    // onImageLoad={() => setLoading(false)}
     onSlide={(index) => console.log('Slide changed to:', index)}
     renderItem={(item) => (
       <div className="w-full h-[500px] flex justify-center items-center border-black border-2 rounded-lg  bg-white/60  overflow-hidden p-16">

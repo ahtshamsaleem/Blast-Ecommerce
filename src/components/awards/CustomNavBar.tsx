@@ -18,7 +18,7 @@ import Button from "../ui/Button";
 
 const navItems = [
   { label: "Home", href: "/" },
-  { label: "Shop", href: "/shop" },
+  { label: "Shop", href: "/buy" },
   { label: "Our boxes", href: "/our-boxes" },
   { label: "Awards", href: "/awards" },
   { label: "Contact", href: "/contact" },
