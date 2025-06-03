@@ -1,0 +1,55 @@
+@import "tailwindcss";
+
+
+:root {
+  --font-main: 'Arboria', sans-serif;
+  --font-arco: 'Arco', sans-serif;
+  --background: #ffffff;
+  --foreground: #171717;
+  --color-purple: #381B7F;
+  --color-yellow: #FDEA13;
+  --color-yellow2: #FFD700;
+  --color-orange: #E74F1B;
+  --color-green: #2CAA66;
+  --color-brown: #925F25;
+  --color-brown2: #A77C5F;
+  --color-brown3: #A47744;
+  --color-blue: #37A6DE;
+  --color-lightblue: #E0E6F5;
+  --color-red: #F40000;
+  --color-white: #F5F5F5;
+}
+
+/* @media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+} */
+
+ 
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-main);
+ }
+
+.font-arco {
+  font-family: var(--font-arco);
+}
+
+.react-multiple-carousel__arrow{
+  background: transparent !important;
+}
+.react-multiple-carousel__arrow:before{
+  color: var(--foreground) !important;
+  font-size: 30px !important;
+  font-weight: 800 !important;
+}
+.outline {
+  color: var(--color-green);
+  -webkit-text-stroke: 3px #ffffff;
+  font-weight: 900;
+  text-transform: uppercase;
+  text-shadow: none !important;
+}
